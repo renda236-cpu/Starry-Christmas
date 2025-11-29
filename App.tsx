@@ -17,9 +17,9 @@ const App: React.FC = () => {
   useEffect(() => {
     audioRef.current = new Howl({
       src: [BGM_URL],
-      loop: true,
+      loop: true,   // --- 完美保留：循环播放 ---
       volume: 0.5,
-      html5: true,
+      html5: false, // --- 必须修改：改为 false 以解决手机端播放不稳定的问题 ---
       preload: true,
     });
 
@@ -28,11 +28,16 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const handleStartMusic = () => {
+    // 点击按钮直接播放，没有淡入，没有静音
+    if (audioRef.current && !audioRef.current.playing()) {
+      audioRef.current.play();
+    }
+  };
+
   const handleIntroComplete = (name: string) => {
     setUserName(name);
-    // User interaction has occurred, safe to play audio
-    audioRef.current?.play();
-    audioRef.current?.fade(0, 0.5, 2000); // Fade in
+    // 之前这里的播放逻辑已移动到 handleStartMusic，这里只负责切换场景
     setStage(AppStage.IMMERSION);
   };
 
@@ -54,7 +59,10 @@ const App: React.FC = () => {
         
         {stage === AppStage.ENTRY && (
           <div className="pointer-events-auto w-full h-full">
-            <IntroScreen onComplete={handleIntroComplete} />
+            <IntroScreen 
+              onComplete={handleIntroComplete} 
+              onUserInteract={handleStartMusic} 
+            />
           </div>
         )}
 

@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface IntroScreenProps {
   onComplete: (name: string) => void;
+  onUserInteract: () => void; // 新增：用于通知播放音乐
 }
 
-const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
+const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete, onUserInteract }) => {
   // Step 0: Typing Intro Text
   // Step 1: Input Name
   // Step 2: Transition Text (Waiting)
@@ -70,6 +71,11 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
 
   const handleNameSubmit = () => {
     if (!name.trim()) return;
+
+    // --- 核心修改：点击瞬间直接触发播放 ---
+    onUserInteract(); 
+    // ----------------------------------
+
     setStep(2); // Move to intermediate state to hide input
     
     // Slight delay before starting the transition text typing
@@ -84,11 +90,6 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
       <div className="max-w-md w-full text-center space-y-8">
         
         {/* Gradient Text for the typewriter effect */}
-        {/* Only show text in steps 0 and 3. Step 1 shows introText (static) or stays. 
-            Actually, step 1 is input phase. We keep the intro text visible? 
-            The previous logic cleared it when typing started. 
-            Let's keep displayedText visible. 
-        */}
         {(step === 0 || step === 3) && (
             <div className="min-h-[120px] text-xl md:text-2xl font-light leading-loose whitespace-pre-wrap cursor font-serif
             text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-pink-100 to-cyan-100 drop-shadow-sm
@@ -97,10 +98,6 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
             </div>
         )}
         
-        {/* During step 1, we might want to keep the full intro text visible above the input, 
-            or just let it sit there. The useEffect for step 0 finishes and sets step 1.
-            The displayedText state holds the full text. So it stays visible. 
-        */}
         {(step === 1 || step === 2) && (
              <div className="min-h-[120px] text-xl md:text-2xl font-light leading-loose whitespace-pre-wrap font-serif
              text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-pink-100 to-cyan-100 drop-shadow-sm
