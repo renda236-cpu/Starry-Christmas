@@ -32,7 +32,10 @@ const Controls: React.FC<ControlsProps> = ({ onTriggerFirework }) => {
   };
 
   return (
-    <div id="ui-controls" className="absolute bottom-8 right-8 z-50 flex flex-col gap-6 items-center">
+    // 布局修正：
+    // top-[35%] right-[8%] flex-col: 
+    // 让按钮组在右侧垂直居中偏上的位置，垂直排列(flex-col)，符合"对称放到右边"的感觉
+    <div id="ui-controls" className="absolute top-[35%] right-[8%] z-[999] flex flex-col gap-6 items-center">
       
       {/* Capture Button */}
       <button 

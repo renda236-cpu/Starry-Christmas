@@ -554,13 +554,49 @@ const FireworksManager = ({ triggerSignal, enableFireworks }: { triggerSignal: n
   );
 };
 
+// --- Camera Adjuster (New Component) ---
+const CameraAdjuster = () => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      
+      if (isMobile) {
+        // 手机端参数调整：
+        // 1. FOV 60: 标准广角，视野更自然
+        // 2. Position [0, 1.5, 42]: 
+        //    Y=1.5 (抬高机位，模拟人站立高度)
+        //    Z=42 (距离适中，看到纵深)
+        camera.fov = 60;
+        camera.position.set(0, 1.5, 42);
+        // 关键：强制低头看路面 (LookAt 0, -6, 0)
+        camera.lookAt(0, -6, 0); 
+      } else {
+        // 电脑端保持原样
+        camera.fov = 45;
+        camera.position.set(0, -1, 30);
+        camera.lookAt(0, 0, 0);
+      }
+      
+      camera.updateProjectionMatrix();
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [camera]);
+
+  return null;
+};
+
 // --- Main Scene ---
 
 const FireworkScene: React.FC<FireworkSceneProps> = ({ triggerSignal, enableFireworks }) => {
   return (
     <Canvas
       dpr={[1, 2]}
-      camera={{ position: [-0.09, -2.55, 24.42], fov: 60, rotation: [0.10, -0.003, 0.0004] }}
       gl={{ 
         preserveDrawingBuffer: true,
         antialias: true,
@@ -569,6 +605,9 @@ const FireworkScene: React.FC<FireworkSceneProps> = ({ triggerSignal, enableFire
       className="absolute inset-0 z-0 bg-[#020205]"
     >
       <color attach="background" args={['#020205']} />
+      
+      {/* Responsive Camera Control */}
+      <CameraAdjuster />
       
       {/* The Avenue of Trees */}
       <Forest />
