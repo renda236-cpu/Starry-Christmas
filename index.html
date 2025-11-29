@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="theme-color" content="#020205" />
+    <title>The Glimmering Nightfall</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        background-color: #020205;
+        font-family: 'Noto Serif SC', serif;
+        overflow: hidden;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Custom Blur Animation Classes */
+      .blur-enter {
+        filter: blur(20px);
+        opacity: 0;
+        transition: all 2s ease-out;
+      }
+      .blur-enter-active {
+        filter: blur(0px);
+        opacity: 1;
+      }
+      .blur-exit {
+        filter: blur(0px);
+        opacity: 1;
+        transition: all 1.5s ease-in;
+      }
+      .blur-exit-active {
+        filter: blur(20px);
+        opacity: 0;
+      }
+      
+      /* Typewriter cursor */
+      .cursor::after {
+        content: '|';
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      /* Force Landscape on Portrait Mobile */
+      @media screen and (orientation: portrait) {
+        #root {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vh;
+            height: 100vw;
+            transform: translate(-50%, -50%) rotate(90deg);
+            overflow: hidden;
+        }
+      }
+      @media screen and (orientation: landscape) {
+        #root {
+            width: 100%;
+            height: 100%;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "three": "https://aistudiocdn.com/three@^0.181.2",
+    "@react-three/fiber": "https://aistudiocdn.com/@react-three/fiber@^9.4.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1",
+    "@react-three/postprocessing": "https://aistudiocdn.com/@react-three/postprocessing@^3.0.4",
+    "howler": "https://aistudiocdn.com/howler@^2.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
