@@ -610,10 +610,10 @@ const FireworkScene: React.FC<FireworkSceneProps> = ({ triggerSignal, enableFire
       {/* Responsive Camera Control */}
       <CameraAdjuster />
 
-      {/* Orbit Controls - 只允许旋转，禁用缩放和平移 */}
+      {/* Orbit Controls - 允许旋转和平移，禁用缩放 */}
       <OrbitControls
         enableZoom={false}
-        enablePan={false}
+        enablePan={true}
         enableRotate={true}
       />
       
