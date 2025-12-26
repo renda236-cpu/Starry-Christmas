@@ -1,6 +1,7 @@
 import React, { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree, extend } from '@react-three/fiber';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { FIREWORK_COLORS } from '../constants';
 import { randomRange, randomColor } from '../utils/helpers';
@@ -608,6 +609,13 @@ const FireworkScene: React.FC<FireworkSceneProps> = ({ triggerSignal, enableFire
       
       {/* Responsive Camera Control */}
       <CameraAdjuster />
+
+      {/* Orbit Controls - 只允许旋转，禁用缩放和平移 */}
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        enableRotate={true}
+      />
       
       {/* The Avenue of Trees */}
       <Forest />

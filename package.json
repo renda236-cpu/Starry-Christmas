@@ -9,14 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react-dom": "^19.2.0",
-    "react": "^19.2.0",
-    "three": "^0.181.2",
+    "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.0",
-    "framer-motion": "^12.23.24",
-    "html2canvas": "^1.4.1",
     "@react-three/postprocessing": "^3.0.4",
-    "howler": "^2.2.4"
+    "framer-motion": "^12.23.24",
+    "howler": "^2.2.4",
+    "html2canvas": "^1.4.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.181.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
