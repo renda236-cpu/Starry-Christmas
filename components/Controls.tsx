@@ -54,14 +54,16 @@ const Controls: React.FC<ControlsProps> = ({ onTriggerFirework }) => {
       </button>
 
       {/* Firework Trigger Button */}
-      <button 
+      <button
         onClick={onTriggerFirework}
-        className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center text-yellow-200 hover:bg-white/20 hover:text-yellow-100 hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all active:scale-90 duration-300"
+        className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/30 overflow-hidden p-1 hover:bg-white/20 hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all active:scale-90 duration-300"
         title="点亮烟火"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
-          <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813a3.75 3.75 0 002.576-2.576l.813-2.846A.75.75 0 019 4.5zM6.97 15.03a.75.75 0 01.721.545l.139.487c.18.63.18 1.256 0 1.886l-.139.487a.75.75 0 01-1.442 0l-.139-.487a3.001 3.001 0 00-2.502-2.062l-.487-.139a.75.75 0 010-1.442l.487-.139a3.003 3.003 0 002.502-2.062l.139-.487a.75.75 0 011.442 0l.139.487c.18.63.18 1.256 0 1.886l-.139.487z" clipRule="evenodd" />
-        </svg>
+        <img
+          src="/my-trigger-icon.png"
+          alt="点亮烟火"
+          className="w-full h-full object-cover rounded-full"
+        />
       </button>
     </div>
   );
